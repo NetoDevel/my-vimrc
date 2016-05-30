@@ -6,11 +6,18 @@ set nocompatible               " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
+" Autocomplete
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+autocmd! User YouCompleteMe call youcompleteme#Enable()
+
 " Color schemes
 Plug 'rainux/vim-desert-warm-256'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
+
+" Indentation
+Plug 'Yggdroot/indentLine'
 
 " Vim Airline
 Plug 'vim-airline/vim-airline'
@@ -34,7 +41,7 @@ Plug 'vim-scripts/ZoomWin'
 Plug 'airblade/vim-rooter'
 " YankRing has been responsible for slow startup in the past.
 Plug 'vim-scripts/YankRing.vim'
-Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'zerowidth/vim-copy-as-rtf'
 "
 if executable('ag')
@@ -324,6 +331,9 @@ let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
 let g:airline_theme= 'wombat'
+
+" IndentLine
+let g:indentLine_char='│'
 
 " neocomplcache
 
