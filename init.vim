@@ -74,6 +74,7 @@ Plug 'vim-scripts/YankRing.vim'
 Plug 'zerowidth/vim-copy-as-rtf'
 Plug 'itchyny/vim-cursorword'
 Plug 'Shougo/unite.vim'
+Plug 'terryma/vim-multiple-cursors'
 "
 if executable('ag')
   Plug 'epmatsw/ag.vim'
@@ -250,6 +251,9 @@ set showmatch
 " set nohlsearch
 
 hi Search ctermfg=NONE ctermbg=NONE cterm=underline
+
+" exit insert, dd line, enter insert
+inoremap <c-d> <esc>ddi
 
 " Toggle search highlighting
 noremap <F4> :set hlsearch! hlsearch?<CR>
