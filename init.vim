@@ -71,6 +71,7 @@ Plug 'airblade/vim-rooter'
 Plug 'vim-scripts/YankRing.vim'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'zerowidth/vim-copy-as-rtf'
+Plug 'itchyny/vim-cursorword'
 "
 if executable('ag')
   Plug 'epmatsw/ag.vim'
