@@ -43,6 +43,7 @@ Plug 'rainux/vim-desert-warm-256'
 " Syntax
 Plug 'sheerun/vim-polyglot'
 Plug 'mattn/emmet-vim'
+Plug 'matthewsimo/angular-vim-snippets'
 
 " Indentation
 Plug 'Yggdroot/indentLine'
@@ -72,6 +73,7 @@ Plug 'vim-scripts/YankRing.vim'
 " Plug 'nathanaelkane/vim-indent-guides'
 Plug 'zerowidth/vim-copy-as-rtf'
 Plug 'itchyny/vim-cursorword'
+Plug 'Shougo/unite.vim'
 "
 if executable('ag')
   Plug 'epmatsw/ag.vim'
