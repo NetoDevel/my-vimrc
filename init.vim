@@ -7,8 +7,8 @@ set nocompatible               " be iMproved
 call plug#begin('~/.vim/plugged')
 
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-autocmd! User YouCompleteMe call youcompleteme#Enable()
+" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
+" autocmd! User YouCompleteMe call youcompleteme#Enable()
 
 " Emmet
 " Enable Emmet in all modes
@@ -81,6 +81,16 @@ if executable('ag')
 elseif executable('ack')
   Plug 'mileszs/ack.vim'
 endif
+
+" Snippets
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
+Plug 'matthewsimo/angular-vim-snippets'
+
+" Autocomplete
+Plug 'Shougo/deoplete.nvim'
+Plug 'carlitux/deoplete-ternjs'
 
 " " Clojure
 " Plug 'neovim/node-host' | Plug 'snoe/nvim-parinfer.js'
@@ -406,6 +416,24 @@ nmap <leader>f :GitFiles<CR>
 nmap <leader>b :Buffers<CR>
 
 " imap <tab> <C-x><C-k>
+
+
+" Snippets
+" Enable snipMate compatibility feature.
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+" Tell Neosnippet about the other snippets
+" let g:neosnippet#snippets_directory='~/.config/repos/github.com/Shougo/neosnippet-snippets/neosnippets, ~/Github/ionic-snippets, ~/.config/repos/github.com/matthewsimo/angular-vim-snippets/snippets'
+
+" SuperTab like snippets behavior.
+  imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: "\<TAB>"
 
 " Mapping selecting mappings
 nmap <leader><tab> <plug>(fzf-maps-n)
