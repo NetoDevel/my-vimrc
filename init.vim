@@ -107,6 +107,7 @@ Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 " Git
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
 
 " Tmux
 Plug 'benmills/vimux'
