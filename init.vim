@@ -9,6 +9,9 @@ call plug#begin('~/.vim/plugged')
 " Color schemes
 Plug 'rainux/vim-desert-warm-256'
 
+" Syntax
+Plug 'sheerun/vim-polyglot'
+
 " Vim Airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
