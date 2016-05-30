@@ -250,7 +250,16 @@ set incsearch
 set showmatch
 " set nohlsearch
 
+" Begin and Start of the current line easily
+noremap H ^
+noremap L g_
+
 hi Search ctermfg=NONE ctermbg=NONE cterm=underline
+
+
+" Align blocks of text and keep them selected
+vmap < <gv
+vmap > >gv
 
 " exit insert, dd line, enter insert
 inoremap <c-d> <esc>ddi
