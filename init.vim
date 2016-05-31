@@ -259,6 +259,7 @@ set smartcase
 set incsearch
 set showmatch
 " set nohlsearch
+nnoremap ; :
 
 " Begin and Start of the current line easily
 noremap H ^
@@ -484,9 +485,10 @@ let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:yankring_history_dir = '/tmp'
 
 " Fugitive
-
 nmap <leader>gs :Gstatus<CR>
 nmap <leader>gc :Gcommit<CR>i
+nmap <leader>gd :Gdiff<CR>
+nmap <leader>ga :Git add %<CR>
 
 " GitGutter
 
@@ -596,3 +598,17 @@ autocmd! bufwritepost nvimrc source %
 
 " fix ctrl+h issue of tmuxnator inside nvim
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+
+" Yunk with mac
+
+function! ClipboardYank()
+  call system('pbcopy', @@)
+endfunction
+function! ClipboardPaste()
+  let @@ = system('pbpaste')
+endfunction
+vnoremap <silent> y y:call ClipboardYank()<cr>
+vnoremap <silent> d d:call ClipboardYank()<cr>
+nnoremap <silent> p :call ClipboardPaste()<cr>p
+onoremap <silent> y y:call ClipboardYank()<cr>
+onoremap <silent> d d:call ClipboardYank()<cr>
