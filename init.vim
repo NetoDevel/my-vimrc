@@ -10,33 +10,6 @@ call plug#begin('~/.vim/plugged')
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 " autocmd! User YouCompleteMe call youcompleteme#Enable()
 
-" Emmet
-" Enable Emmet in all modes
-" Remapping <C-y>, just doesn't cut it.
-  function! s:expand_html_tab()
-" try to determine if we're within quotes or tags.
-" if so, assume we're in an emmet fill area.
-   let line = getline('.')
-   if col('.') < len(line)
-     let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
-     if len(line) >= 2
-        return "\<C-n>"
-     endif
-   endif
-" expand anything emmet thinks is expandable.
-  if emmet#isExpandable()
-    return "\<C-y>,"
-  endif
-" return a regular tab character
-  return "\<tab>"
-  endfunction
-  autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
-  let g:user_emmet_mode='a'
-  let g:user_emmet_complete_tag = 1
-  let g:user_emmet_install_global = 0
-  autocmd FileType html,css EmmetInstall
-"}}}
-
 " Color schemes
 Plug 'rainux/vim-desert-warm-256'
 
@@ -258,8 +231,6 @@ set ignorecase
 set smartcase
 set incsearch
 set showmatch
-" set nohlsearch
-nnoremap ; :
 
 " Begin and Start of the current line easily
 noremap H ^
@@ -599,16 +570,31 @@ autocmd! bufwritepost nvimrc source %
 " fix ctrl+h issue of tmuxnator inside nvim
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 
-" Yunk with mac
 
-function! ClipboardYank()
-  call system('pbcopy', @@)
-endfunction
-function! ClipboardPaste()
-  let @@ = system('pbpaste')
-endfunction
-vnoremap <silent> y y:call ClipboardYank()<cr>
-vnoremap <silent> d d:call ClipboardYank()<cr>
-nnoremap <silent> p :call ClipboardPaste()<cr>p
-onoremap <silent> y y:call ClipboardYank()<cr>
-onoremap <silent> d d:call ClipboardYank()<cr>
+" " Emmet
+" " Enable Emmet in all modes
+" " Remapping <C-y>, just doesn't cut it.
+"   function! s:expand_html_tab()
+" " try to determine if we're within quotes or tags.
+" " if so, assume we're in an emmet fill area.
+"    let line = getline('.')
+"    if col('.') < len(line)
+"      let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
+"      if len(line) >= 2
+"         return "\<C-n>"
+"      endif
+"    endif
+" " expand anything emmet thinks is expandable.
+"   if emmet#isExpandable()
+"     return "\<C-y>,"
+"   endif
+" " return a regular tab character
+"   return "\<tab>"
+"   endfunction
+"   autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
+"   let g:user_emmet_mode='a'
+"   let g:user_emmet_complete_tag = 1
+"   let g:user_emmet_install_global = 0
+"   autocmd FileType html,css EmmetInstall
+
+set clipboard+=unnamedplus
