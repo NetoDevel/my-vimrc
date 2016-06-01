@@ -398,7 +398,7 @@ let g:indentLine_char='│'
 
 " FZF (Fuzzy search)
 " https://github.com/junegunn/fzf.vim
-nmap <leader>f :GitFiles<CR>
+nmap <leader>f :Files<CR>
 nmap <leader>b :Buffers<CR>
 
 " Snippets
