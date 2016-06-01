@@ -65,13 +65,6 @@ Plug 'matthewsimo/angular-vim-snippets'
 Plug 'Shougo/deoplete.nvim'
 Plug 'carlitux/deoplete-ternjs'
 
-" " Clojure
-" Plug 'neovim/node-host' | Plug 'snoe/nvim-parinfer.js'
-" Plug 'kovisoft/paredit', { 'for': ['clojure', 'clojurescript', 'scheme'] }
-" Plug 'cemerick/piggieback' | Plug 'tpope/vim-fireplace'
-" Plug 'guns/vim-clojure-static' | Plug 'guns/vim-clojure-highlight'
-" Plug 'kien/rainbow_parentheses.vim', { 'for': ['clojure', 'scheme'] }
-
 " Rails
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-haml', { 'for': 'haml' }
