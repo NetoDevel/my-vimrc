@@ -39,6 +39,7 @@ Plug 'itchyny/vim-cursorword'
 Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
+Plug 'godlygeek/tabular'
 
 " Objects
 Plug 'kana/vim-textobj-entire'
