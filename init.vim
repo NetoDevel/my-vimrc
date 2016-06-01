@@ -40,8 +40,9 @@ Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 
-" Objects
+" Sorted Objects
 Plug 'kana/vim-textobj-entire'
+
 
 "
 if executable('ag')
@@ -74,6 +75,7 @@ Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'lucapette/vim-ruby-doc', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'eruby'] }
 Plug 'Keithbsmiley/rspec.vim', { 'for': ['ruby'] }
+Plug 'bootleq/vim-textobj-rubysymbol', { 'for': 'ruby' }
 
 " Crystal
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
