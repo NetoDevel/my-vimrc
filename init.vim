@@ -40,9 +40,10 @@ Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 
-" Sorted Objects
+" Objects
 Plug 'kana/vim-textobj-entire'
-
+Plug 'kana/vim-textobj-function'
+Plug 'thinca/vim-textobj-function-javascript', { 'for': 'javascript' }
 
 "
 if executable('ag')
