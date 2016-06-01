@@ -40,6 +40,9 @@ Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 
+" Objects
+Plug 'kana/vim-textobj-entire'
+
 "
 if executable('ag')
   Plug 'epmatsw/ag.vim'
