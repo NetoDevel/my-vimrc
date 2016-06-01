@@ -41,6 +41,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'kana/vim-textobj-user'
 Plug 'godlygeek/tabular'
 Plug 'skwp/greplace.vim'
+Plug 'henrik/vim-indexed-search'
 
 " Objects
 Plug 'kana/vim-textobj-entire'
