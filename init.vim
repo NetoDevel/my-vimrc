@@ -42,6 +42,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'godlygeek/tabular'
 Plug 'skwp/greplace.vim'
 Plug 'henrik/vim-indexed-search'
+Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'log' }
 
 " Objects
 Plug 'kana/vim-textobj-entire'
