@@ -157,7 +157,7 @@ highlight clear SignColumn
 highlight CursorLine term=NONE cterm=NONE ctermbg=236
 
 " make vertical split bar character a space (so not visible)
-set fillchars+=vert:\ 
+set fillchars+=vert:\
 
 set splitbelow splitright
 
@@ -224,6 +224,45 @@ hi StatusLineNC ctermfg=Black ctermbg=Grey
 "  Mappings
 "  ---------------------------------------------------------------------------
 
+"(v)im (r)eload
+nmap <silent> ,vr :so %<CR>
+
+" alias yw to yank the entire word 'yank inner word'
+" even if the cursor is halfway inside the word
+nnoremap ,yw yiww
+
+" ,ow = 'overwrite word', replace a word with what's in the yank buffer
+nnoremap ,ow "_diwhp
+
+"make Y consistent with C and D
+nnoremap Y y$
+function! YRRunAfterMaps()
+  nnoremap Y   :<C-U>YRYankCount 'y$'<CR>
+endfunction
+
+" via: http://rails-bestpractices.com/posts/60-remove-trailing-whitespace
+" Strip trailing whitespace
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+command! StripTrailingWhitespaces call <SID>StripTrailingWhitespaces()
+nmap ,w :StripTrailingWhitespaces<CR>
+
+" Make 0 go to the first character rather than the beginning
+" of the line. When we're programming, we're almost always
+" interested in working with text rather than empty space. If
+" you want the traditional beginning of line, use ^
+nnoremap 0 ^
+nnoremap ^ 0
+
 " Searching / moving
 nnoremap / /\v
 vnoremap / /\v
@@ -264,16 +303,25 @@ nnoremap k gk
 
 " To search in files (,a) we can use ack or ag
 if executable('ag')
-  nnoremap <leader>a :Ag! 
+  nnoremap <leader>a :Ag!
   nnoremap <leader>aa :Ag! <cword><CR>
 elseif executable('ack')
-  nnoremap <leader>a :Ack! 
+  nnoremap <leader>a :Ack!
   nnoremap <leader>a :Ack! <cword><CR>
   let g:ackprg="ack -H --nocolor --nogroup --column"
 endif
 
 " Auto format
 map === gg=G`.
+
+" gary bernhardt's hashrocket
+imap <c-l> <space>=><space>
+
+" Create window splits easier. The default
+" way is Ctrl-w,v and Ctrl-w,s. I remap
+" this to vv and ss
+nnoremap <silent> vv <C-w>v
+nnoremap <silent> ss <C-w>s
 
 " TERMINAL
 tnoremap <Esc> <C-\><C-n>
@@ -314,7 +362,6 @@ set wildignore+=*/vendor/cache/*,*/public/system/*,*/tmp/*,*/log/*,*/solr/data/*
 
 " Saving and exit
 nmap <leader>q :wqa!<CR>
-nmap <leader>w :w!<CR>
 nmap <leader><Esc> :q!<CR>
 
 " CTAGS aka autocomplete
@@ -392,16 +439,95 @@ let NERDChristmasTree = 1
 let NERDTreeWinPos = "left"
 let NERDTreeHijackNetrw = 1
 let NERDTreeQuitOnOpen = 1
-let NERDTreeWinSize = 50 
+let NERDTreeWinSize = 50
 let NERDTreeChDirMode = 2
 let NERDTreeDirArrows = 1
+
+" " Surround
+" Ruby
+" Use v or # to get a variable interpolation (inside of a string)}
+" ysiw#   Wrap the token under the cursor in #{}
+" v...s#  Wrap the selection in #{}
+let g:surround_113 = "#{\r}"   " v
+let g:surround_35  = "#{\r}"   " #
+
+" Select text in an ERb file with visual mode and then press s- or s=
+" Or yss- to do entire line.
+let g:surround_45 = "<% \r %>"    " -
+let g:surround_61 = "<%= \r %>"   " =
+
+" Change inside various enclosures with Cmd-" and Cmd-'
+" The f makes it find the enclosure so you don't have
+" to be standing inside it
+nnoremap <D-'> f'ci'
+nnoremap <D-"> f"ci"
+nnoremap <D-(> f(ci(
+nnoremap <D-)> f)ci)
+nnoremap <D-[> f[ci[
+nnoremap <D-]> f]ci]
+
+
+" ,# Surround a word with #{ruby interpolation}
+map ,# ysiw#
+vmap ,# c#{<C-R>"}<ESC>
+
+" ," Surround a word with "quotes"
+map ," ysiw"
+vmap ," c"<C-R>""<ESC>
+
+" ,' Surround a word with 'single quotes'
+map ,' ysiw'
+vmap ,' c'<C-R>"'<ESC>
+
+" ,) or ,( Surround a word with (parens)
+" The difference is in whether a space is put in
+map ,( ysiw(
+map ,) ysiw)
+vmap ,( c( <C-R>" )<ESC>
+vmap ,) c(<C-R>")<ESC>
+
+" ,[ Surround a word with [brackets]
+map ,] ysiw]
+map ,[ ysiw[
+vmap ,[ c[ <C-R>" ]<ESC>
+vmap ,] c[<C-R>"]<ESC>
+
+" ,{ Surround a word with {braces}
+map ,} ysiw}
+map ,{ ysiw{
+vmap ,} c{ <C-R>" }<ESC>
+vmap ,{ c{<C-R>"}<ESC>
+
+map ,` ysiw`
+" "
+
+" move up/down quickly by using Cmd-j, Cmd-k
+" which will move us around by functions
+nnoremap <silent> <D-j> }
+nnoremap <silent> <D-k> {
+autocmd FileType ruby map <buffer> <D-j> ]m
+autocmd FileType ruby map <buffer> <D-k> [m
+autocmd FileType rspec map <buffer> <D-j> }
+autocmd FileType rspec map <buffer> <D-k> {
+autocmd FileType javascript map <buffer> <D-k> }
+autocmd FileType javascript map <buffer> <D-j> {
+
+" ============================
+" Tabularize - alignment
+" ============================
+" Hit Cmd-Shift-A then type a character you want to align by
+nmap <D-A> :Tabularize /
+vmap <D-A> :Tabularize /
+
+" Source current file Cmd-% (good for vim development)
+map <D-%> :so %<CR>
 
 " Use only current file to autocomplete from tags
 set complete=.,w,b,u,t,i
 
 " AutoClose
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'} 
-let g:AutoCloseProtectedRegions = ["Character"] 
+let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}'}
+let g:AutoCloseProtectedRegions = ["Character"]
 
 let my_home = expand("$HOME/")
 
@@ -469,9 +595,9 @@ let g:ruby_doc_command='open' " MacOS
 " map <S-r> :w !ruby<CR>
 
 " Skip to Model, View or Controller
-map <Leader>m :Rmodel 
-map <Leader>v :Rview 
-map <Leader>c :Rcontroller 
+map <Leader>m :Rmodel
+map <Leader>v :Rview
+map <Leader>c :Rcontroller
 
 " Other files to consider Ruby
 au BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
