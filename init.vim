@@ -444,6 +444,18 @@ let NERDTreeWinSize = 50
 let NERDTreeChDirMode = 2
 let NERDTreeDirArrows = 1
 
+" ==== NERD tree
+" Open the project tree and expose current file in the nerdtree with Ctrl-\
+" " calls NERDTreeFind iff NERDTree is active, current window contains a modifiable file, and we're not in vimdiff
+function! OpenNerdTree()
+  if &modifiable && strlen(expand('%')) > 0 && !&diff
+    NERDTreeFind
+  else
+    NERDTreeToggle
+  endif
+endfunction
+nnoremap <silent> <C-\> :call OpenNerdTree()<CR>
+
 " " Surround
 " Ruby
 " Use v or # to get a variable interpolation (inside of a string)}
