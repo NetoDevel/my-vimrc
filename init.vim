@@ -89,6 +89,7 @@ Plug 'claco/jasmine.vim', { 'for': 'javascript' }
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'mattn/webapi-vim' | Plug 'mattn/gist-vim'
+Plug 'gregsexton/gitv'
 
 " Tmux
 Plug 'benmills/vimux'
