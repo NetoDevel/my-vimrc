@@ -6,17 +6,11 @@ set nocompatible               " be iMproved
 
 call plug#begin('~/.vim/plugged')
 
-" Autocomplete
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
-" autocmd! User YouCompleteMe call youcompleteme#Enable()
-
 " Color schemes
 Plug 'rainux/vim-desert-warm-256'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
-Plug 'mattn/emmet-vim'
-Plug 'matthewsimo/angular-vim-snippets'
 
 " Indentation
 Plug 'Yggdroot/indentLine'
@@ -29,7 +23,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeMirror'] }
 
-" brew install fzf
+" Fuzzy finder
 Plug 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -57,6 +51,8 @@ endif
 Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'honza/vim-snippets'
+Plug 'matthewsimo/angular-vim-snippets'
+Plug 'mattn/emmet-vim'
 Plug 'matthewsimo/angular-vim-snippets'
 
 " Autocomplete
@@ -110,6 +106,9 @@ set noswapfile
 set autoread
 set undofile
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
+
+" Make clipboard work with clipboard mac native
+set clipboard+=unnamedplus
 
 "  ---------------------------------------------------------------------------
 "  UI
@@ -206,11 +205,6 @@ set statusline+=\ [line\ %l\/%L]
 hi StatusLine ctermfg=Black ctermbg=White
 hi StatusLineNC ctermfg=Black ctermbg=Grey
 
-" Change colour of statusline in insert mode
-"au InsertEnter * hi StatusLine ctermbg=DarkBlue
-"au InsertLeave * hi StatusLine ctermfg=Black ctermbg=White
-
-
 "  ---------------------------------------------------------------------------
 "  Mappings
 "  ---------------------------------------------------------------------------
@@ -249,23 +243,11 @@ map <c-space> ?
 nmap n nzz
 nmap N Nzz
 
-" Turn off arrow keys (this might not be a good idea for beginners, but it is
-" the best way to ween yourself of arrow keys on to hjkl)
-" http://yehudakatz.com/2010/07/29/everyone-who-tried-to-convince-me-to-use-vim-was-wrong/
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>"
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
-
+" Remap move up and down
 nnoremap j gj
 nnoremap k gk
 
 " To search in files (,a) we can use ack or ag
-
 if executable('ag')
   nnoremap <leader>a :Ag! 
   nnoremap <leader>aa :Ag! <cword><CR>
@@ -274,8 +256,6 @@ elseif executable('ack')
   nnoremap <leader>a :Ack! <cword><CR>
   let g:ackprg="ack -H --nocolor --nogroup --column"
 endif
-
-" Ack settings: https://github.com/krisleech/vimfiles/wiki/Make-ack-ignore-files
 
 " Auto format
 map === gg=G`.
@@ -354,32 +334,10 @@ let g:airline_theme= 'wombat'
 " IndentLine
 let g:indentLine_char='│'
 
-" neocomplcache
-
-" if !exists('g:neocomplcache_omni_patterns')
-"   let g:neocomplcache_omni_patterns = {}
-" endif
-" let g:neocomplcache_enable_at_startup = 1
-" let g:neocomplcache_omni_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-
-" Ctrlp
-
-" map <leader>b :CtrlPBuffer<CR>
-" let g:ctrlp_map = ',t'
-" let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_match_window_reversed = 0
-" let g:ctrlp_use_caching = 1
-" let g:ctrlp_clear_cache_on_exit = 0
-" let g:ctrlp_cache_dir = '/tmp/ctrlp'
-
-
 " FZF (Fuzzy search)
 " https://github.com/junegunn/fzf.vim
 nmap <leader>f :GitFiles<CR>
 nmap <leader>b :Buffers<CR>
-
-" imap <tab> <C-x><C-k>
-
 
 " Snippets
 " Enable snipMate compatibility feature.
@@ -453,7 +411,6 @@ nmap <leader>gd :Gdiff<CR>
 nmap <leader>ga :Git add %<CR>
 
 " GitGutter
-
 let g:gitgutter_map_keys = 0
 
 "  ---------------------------------------------------------------------------
@@ -541,11 +498,6 @@ let Tlist_Ctags_Cmd = 'ctags'
 " https://rvm.beginrescueend.com/integration/vim/
 set shell=/bin/sh
 
-" Finally, load custom configs
-" if filereadable(my_home . '.vimrc.local')
-"   source ~/.vimrc.local
-" endif
-
 set exrc            " enable per-directory .vimrc files
 set secure          " disable unsafe commands in local .vimrc files
 
@@ -562,30 +514,29 @@ autocmd! bufwritepost nvimrc source %
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 
 
-" " Emmet
-" " Enable Emmet in all modes
-" " Remapping <C-y>, just doesn't cut it.
-"   function! s:expand_html_tab()
-" " try to determine if we're within quotes or tags.
-" " if so, assume we're in an emmet fill area.
-"    let line = getline('.')
-"    if col('.') < len(line)
-"      let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
-"      if len(line) >= 2
-"         return "\<C-n>"
-"      endif
-"    endif
-" " expand anything emmet thinks is expandable.
-"   if emmet#isExpandable()
-"     return "\<C-y>,"
-"   endif
-" " return a regular tab character
-"   return "\<tab>"
-"   endfunction
-"   autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
-"   let g:user_emmet_mode='a'
-"   let g:user_emmet_complete_tag = 1
-"   let g:user_emmet_install_global = 0
-"   autocmd FileType html,css EmmetInstall
+" Emmet
+" Enable Emmet in all modes
+" Remapping <C-y>, just doesn't cut it.
+  function! s:expand_html_tab()
+" try to determine if we're within quotes or tags.
+" if so, assume we're in an emmet fill area.
+   let line = getline('.')
+   if col('.') < len(line)
+     let line = matchstr(line, '[">][^<"]*\%'.col('.').'c[^>"]*[<"]')
+     if len(line) >= 2
+        return "\<C-n>"
+     endif
+   endif
+" expand anything emmet thinks is expandable.
+  if emmet#isExpandable()
+    return "\<C-y>,"
+  endif
+" return a regular tab character
+  return "\<tab>"
+  endfunction
+  autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
+  let g:user_emmet_mode='a'
+  let g:user_emmet_complete_tag = 1
+  let g:user_emmet_install_global = 0
+  autocmd FileType html,css EmmetInstall
 
-set clipboard+=unnamedplus
