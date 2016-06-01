@@ -43,6 +43,7 @@ Plug 'godlygeek/tabular'
 Plug 'skwp/greplace.vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'log' }
+Plug 'MattesGroeger/vim-bookmarks'
 
 " Objects
 Plug 'kana/vim-textobj-entire'
@@ -225,7 +226,7 @@ hi StatusLineNC ctermfg=Black ctermbg=Grey
 "  ---------------------------------------------------------------------------
 
 "(v)im (r)eload
-nmap <silent> ,vr :so %<CR>
+nmap <silent> ,vr :so ~/.config/nvim/init.vim<CR>
 
 " alias yw to yank the entire word 'yank inner word'
 " even if the cursor is halfway inside the word
