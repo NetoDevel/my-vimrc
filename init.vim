@@ -44,6 +44,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-function'
 Plug 'thinca/vim-textobj-function-javascript', { 'for': 'javascript' }
+Plug 'lucapette/vim-textobj-underscore'
 
 "
 if executable('ag')
