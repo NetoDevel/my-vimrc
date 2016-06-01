@@ -29,25 +29,23 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'mileszs/ack.vim'
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTree', 'NERDTreeToggle', 'NERDTreeMirror'] }
 
-" Plug 'kien/ctrlp.vim'
-"
 " brew install fzf
 Plug 'junegunn/fzf', { 'dir': '/usr/local/opt/fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"
-" " Utility
+
+" Utilities
 Plug 'tpope/vim-surround'
 Plug 'Townk/vim-autoclose'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/ZoomWin'
 Plug 'airblade/vim-rooter'
-" YankRing has been responsible for slow startup in the past.
 Plug 'vim-scripts/YankRing.vim'
-" Plug 'nathanaelkane/vim-indent-guides'
 Plug 'zerowidth/vim-copy-as-rtf'
 Plug 'itchyny/vim-cursorword'
 Plug 'Shougo/unite.vim'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'kana/vim-textobj-user'
+
 "
 if executable('ag')
   Plug 'epmatsw/ag.vim'
@@ -73,7 +71,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 " Ruby
 Plug 'gmarik/snipmate.vim', { 'for': ['ruby'] }
 Plug 'tpope/vim-endwise', { 'for': ['ruby', 'lua'] }
-Plug 'kana/vim-textobj-user' | Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
+Plug 'nelstrom/vim-textobj-rubyblock', { 'for': 'ruby' }
 Plug 'lucapette/vim-ruby-doc', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'eruby'] }
 Plug 'Keithbsmiley/rspec.vim', { 'for': ['ruby'] }
