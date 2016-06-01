@@ -43,7 +43,6 @@ Plug 'kana/vim-textobj-user'
 " Objects
 Plug 'kana/vim-textobj-entire'
 Plug 'kana/vim-textobj-function'
-Plug 'thinca/vim-textobj-function-javascript', { 'for': 'javascript' }
 Plug 'lucapette/vim-textobj-underscore'
 
 "
@@ -81,6 +80,10 @@ Plug 'bootleq/vim-textobj-rubysymbol', { 'for': 'ruby' }
 
 " Crystal
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
+
+" Javascript
+Plug 'thinca/vim-textobj-function-javascript', { 'for': 'javascript' }
+Plug 'claco/jasmine.vim', { 'for': 'javascript' }
 
 " Git
 Plug 'tpope/vim-fugitive'
