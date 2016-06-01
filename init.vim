@@ -519,9 +519,6 @@ autocmd FileType javascript map <buffer> <D-j> {
 nmap <D-A> :Tabularize /
 vmap <D-A> :Tabularize /
 
-" Source current file Cmd-% (good for vim development)
-map <D-%> :so %<CR>
-
 " Use only current file to autocomplete from tags
 set complete=.,w,b,u,t,i
 
@@ -647,13 +644,12 @@ set secure          " disable unsafe commands in local .vimrc files
 "  ---------------------------------------------------------------------------
 
 " When vimrc, either directly or via symlink, is edited, automatically reload it
-autocmd! bufwritepost .nvimrc source %
-autocmd! bufwritepost nvimrc source %
+autocmd! bufwritepost ~/.config/nvim/init.vim source %
+autocmd! bufwritepost ~/.config/nvim/init.vim  source %
 " autocmd! bufwritepost bundles.vim source %
 
 " fix ctrl+h issue of tmuxnator inside nvim
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
-
 
 " Emmet
 " Enable Emmet in all modes
