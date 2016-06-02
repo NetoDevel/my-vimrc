@@ -401,7 +401,7 @@ let g:airline_left_sep = ' '
 let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
-let g:airline_theme= 'wombat'
+let g:airline_theme= 'oceanicnext'
 
 " IndentLine
 let g:indentLine_char='│'
@@ -670,14 +670,15 @@ autocmd! bufwritepost ~/.config/nvim/init.vim source %
 autocmd! bufwritepost ~/.config/nvim/init.vim  source %
 " autocmd! bufwritepost bundles.vim source %
 
-" fix ctrl+h issue of tmuxnator inside nvim
+" Ensure to vim tmux cicle pages always work
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
 nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
 nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
-
+" fix ctrl+h issue of tmuxnator inside nvim
+nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 
 " Emmet
 " Enable Emmet in all modes
