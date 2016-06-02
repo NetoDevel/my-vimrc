@@ -7,7 +7,8 @@ set nocompatible               " be iMproved
 call plug#begin('~/.vim/plugged')
 
 " Color schemes
-Plug 'rainux/vim-desert-warm-256'
+" Plug 'rainux/vim-desert-warm-256'
+Plug 'mhartington/oceanic-next'
 
 " Syntax
 Plug 'sheerun/vim-polyglot'
@@ -74,6 +75,9 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-haml', { 'for': 'haml' }
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }
 
+" Docker
+Plug 'ekalinin/Dockerfile.vim'
+
 " Ruby
 Plug 'gmarik/snipmate.vim', { 'for': ['ruby'] }
 Plug 'tpope/vim-endwise', { 'for': ['ruby', 'lua'] }
@@ -89,6 +93,7 @@ Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 " Javascript
 Plug 'thinca/vim-textobj-function-javascript', { 'for': 'javascript' }
 Plug 'claco/jasmine.vim', { 'for': 'javascript' }
+Plug 'othree/yajs.vim', { 'for': 'javascript' }
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -100,7 +105,8 @@ Plug 'gregsexton/gitv'
 Plug 'benmills/vimux'
 Plug 'jgdavey/vim-turbux'
 Plug 'christoomey/vim-tmux-navigator'
-"
+Plug 'tmux-plugins/vim-tmux-focus-events'
+
 call plug#end()
 
 runtime macros/matchit.vim
@@ -152,10 +158,13 @@ set relativenumber
 set previewheight=20
 
 set t_Co=256
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+colorscheme OceanicNext
 set background=dark
-colorscheme desert-warm-256
 highlight clear SignColumn
-highlight CursorLine term=NONE cterm=NONE ctermbg=236
+highlight CursorLine term=NONE cterm=NONE ctermbg=23
+let g:legacy_blue=1
+
 
 " make vertical split bar character a space (so not visible)
 set fillchars+=vert:\
@@ -662,7 +671,13 @@ autocmd! bufwritepost ~/.config/nvim/init.vim  source %
 " autocmd! bufwritepost bundles.vim source %
 
 " fix ctrl+h issue of tmuxnator inside nvim
-nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+let g:tmux_navigator_no_mappings = 1
+nnoremap <silent> <C-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <C-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <C-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <C-h> :TmuxNavigateLeft<CR>
+nnoremap <silent> <C-;> :TmuxNavigatePrevious<cr>
+
 
 " Emmet
 " Enable Emmet in all modes
@@ -689,4 +704,3 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
   let g:user_emmet_complete_tag = 1
   let g:user_emmet_install_global = 0
   autocmd FileType html,css EmmetInstall
-

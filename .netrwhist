@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_cnt =4
 let g:netrw_dirhist_1='/Users/alexvko/.oh-my-zsh'
 let g:netrw_dirhist_2='/Users/alexvko/.oh-my-zsh/custom'
 let g:netrw_dirhist_3='/Users/alexvko/.oh-my-zsh'
+let g:netrw_dirhist_4='/Users/alexvko/.config/iterm/ocean-dark.itermcolors'
