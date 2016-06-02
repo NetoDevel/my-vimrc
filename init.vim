@@ -163,7 +163,6 @@ colorscheme OceanicNext
 set background=dark
 highlight clear SignColumn
 highlight CursorLine term=NONE cterm=NONE ctermbg=23
-let g:legacy_blue=1
 
 
 " make vertical split bar character a space (so not visible)
@@ -401,7 +400,8 @@ let g:airline_left_sep = ' '
 let g:airline_left_alt_sep = '|'
 let g:airline_right_sep = ' '
 let g:airline_right_alt_sep = '|'
-let g:airline_theme= 'oceanicnext'
+let g:airline_theme= 'wombat'
+" let g:airline_theme= 'oceanicnext'
 
 " IndentLine
 let g:indentLine_char='│'
