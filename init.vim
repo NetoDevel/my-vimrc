@@ -45,6 +45,7 @@ Plug 'skwp/greplace.vim'
 Plug 'henrik/vim-indexed-search'
 Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'log' }
 Plug 'MattesGroeger/vim-bookmarks'
+Plug 'austintaylor/vim-indentobject'
 
 " Objects
 Plug 'kana/vim-textobj-entire'
