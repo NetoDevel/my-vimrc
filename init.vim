@@ -118,8 +118,8 @@ runtime macros/matchit.vim
 
 syntax enable
 filetype plugin indent on
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "  "
+let g:mapleader = "  "
 imap jj <ESC>
 set modelines=0
 set history=1000
