@@ -118,9 +118,8 @@ runtime macros/matchit.vim
 
 syntax enable
 filetype plugin indent on
-let mapleader = "  "
-let g:mapleader = "  "
-imap jj <ESC>
+let mapleader = ","
+let g:mapleader = ","
 set modelines=0
 set history=1000
 set nobackup
@@ -236,6 +235,9 @@ hi StatusLineNC ctermfg=Black ctermbg=Grey
 
 "(v)im (r)eload
 nmap <silent> ,vr :so ~/.config/nvim/init.vim<CR>
+
+" Replace all words under cursor
+:nnoremap <Leader>saw :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " alias yw to yank the entire word 'yank inner word'
 " even if the cursor is halfway inside the word
