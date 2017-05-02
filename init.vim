@@ -7,6 +7,8 @@ set nocompatible               " be iMproved
 call plug#begin('~/.vim/plugged')
 
 " Color schemes
+Plug 'flazz/vim-colorschemes'
+
 " Plug 'rainux/vim-desert-warm-256'
 Plug 'mhartington/oceanic-next'
 
@@ -46,6 +48,7 @@ Plug 'henrik/vim-indexed-search'
 Plug 'vim-scripts/AnsiEsc.vim', { 'for': 'log' }
 Plug 'MattesGroeger/vim-bookmarks'
 Plug 'austintaylor/vim-indentobject'
+Plug 'scrooloose/syntastic'
 
 " Objects
 Plug 'kana/vim-textobj-entire'
@@ -87,6 +90,8 @@ Plug 'lucapette/vim-ruby-doc', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby', 'eruby'] }
 Plug 'Keithbsmiley/rspec.vim', { 'for': ['ruby'] }
 Plug 'bootleq/vim-textobj-rubysymbol', { 'for': 'ruby' }
+Plug 'ngmy/vim-rubocop'
+Plug 'janko-m/vim-test'
 
 " Crystal
 Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
@@ -95,6 +100,26 @@ Plug 'rhysd/vim-crystal', { 'for': 'crystal' }
 Plug 'thinca/vim-textobj-function-javascript', { 'for': 'javascript' }
 Plug 'claco/jasmine.vim', { 'for': 'javascript' }
 Plug 'othree/yajs.vim', { 'for': 'javascript' }
+Plug 'burnettk/vim-angular'
+
+" Typescript
+Plug 'leafgarland/typescript-vim'
+
+" Elm
+Plug 'elmcast/elm-vim'
+Plug 'lambdatoast/elm.vim'
+
+" Clojure / Clojurescript
+Plug 'kien/rainbow_parentheses.vim'
+Plug 'tpope/vim-fireplace'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-salve'
+Plug 'guns/vim-clojure-static'
+Plug 'guns/vim-clojure-highlight'
+Plug 'venantius/vim-eastwood'
+Plug 'venantius/vim-cljfmt'
+Plug 'kassio/neoterm'
+Plug 'snoe/nvim-parinfer.js'
 
 " Git
 Plug 'tpope/vim-fugitive'
@@ -158,11 +183,14 @@ set relativenumber
 set previewheight=20
 
 set t_Co=256
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme OceanicNext
 set background=dark
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+" colorscheme OceanicNext
+" colorscheme molokai
+colorscheme hybrid
 highlight clear SignColumn
-highlight CursorLine term=NONE cterm=NONE ctermbg=23
+" highlight CursorLine term=NONE cterm=NONE ctermbg=23
+highlight CursorLine term=NONE cterm=NONE ctermbg=237
 
 
 " make vertical split bar character a space (so not visible)
@@ -625,6 +653,43 @@ map <Leader>c :Rcontroller
 au BufRead,BufNewFile Gemfile,Rakefile,Thorfile,config.ru,Vagrantfile,Guardfile,Capfile set ft=ruby
 
 "  ---------------------------------------------------------------------------
+"  Elm 
+"  ---------------------------------------------------------------------------
+
+let g:elm_format_autosave = 1
+let g:elm_classic_highlighting = 1
+
+"  ---------------------------------------------------------------------------
+"  Clojure 
+"  ---------------------------------------------------------------------------
+
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesActivate
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadRound
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadSquare
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl RainbowParenthesesLoadBraces
+autocmd BufEnter *.cljs,*.clj,*.cljs.hl setlocal iskeyword+=?,-,*,!,+,/,=,<,>,.,:
+
+" -- Rainbow parenthesis options
+let g:rbpt_colorpairs = [
+\ ['darkyellow',  'RoyalBlue3'],
+\ ['darkgreen',   'SeaGreen3'],
+\ ['darkcyan',    'DarkOrchid3'],
+\ ['Darkblue',    'firebrick3'],
+\ ['DarkMagenta', 'RoyalBlue3'],
+\ ['darkred',     'SeaGreen3'],
+\ ['darkyellow',  'DarkOrchid3'],
+\ ['darkgreen',   'firebrick3'],
+\ ['darkcyan',    'RoyalBlue3'],
+\ ['Darkblue',    'SeaGreen3'],
+\ ['DarkMagenta', 'DarkOrchid3'],
+\ ['Darkblue',    'firebrick3'],
+\ ['darkcyan',    'SeaGreen3'],
+\ ['darkgreen',   'RoyalBlue3'],
+\ ['darkyellow',  'DarkOrchid3'],
+\ ['darkred',     'firebrick3'],
+\ ]
+
+"  ---------------------------------------------------------------------------
 "  GUI
 "  ---------------------------------------------------------------------------
 
@@ -703,7 +768,7 @@ nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 " return a regular tab character
   return "\<tab>"
   endfunction
-  autocmd FileType html,markdown imap <buffer><expr><tab> <sid>expand_html_tab()
+  autocmd FileType html,markdown,erb imap <buffer><expr><tab> <sid>expand_html_tab()
   let g:user_emmet_mode='a'
   let g:user_emmet_complete_tag = 1
   let g:user_emmet_install_global = 0
